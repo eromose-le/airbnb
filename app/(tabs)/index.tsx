@@ -1,31 +1,22 @@
-import { StyleSheet } from 'react-native';
+import { View, Text } from "react-native";
+import React from "react";
+import { Link, Stack } from "expo-router";
+import ExploreHeader from "@/components/ExploreHeader";
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
-
-export default function TabOneScreen() {
+const Page = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+    <View style={{ flex: 1 }}>
+      <Stack.Screen options={{
+        header: () => <ExploreHeader onCategoryChanged={function (category: string): void {
+          throw new Error("Function not implemented.");
+        } } />
+      }} />
+      {/* <Text>Page</Text>
+      <Link href={"/(modals)/login"}>Login</Link>
+      <Link href={"/(modals)/booking"}>Bookings</Link>
+      <Link href={"/listing/1"}>Listing detail page</Link> */}
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+export default Page;

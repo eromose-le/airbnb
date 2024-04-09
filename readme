@@ -1,0 +1,8 @@
+# Project setup
+npx create-expo-app airbnb -t tabs
+
+# Start Project
+npx expo
+
+# Resources
+https://icons.expo.fyi/Index

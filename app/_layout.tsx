@@ -104,6 +104,18 @@ function RootLayoutNav() {
         }}
       />
 
+      {/* Listing Detailed Page */}
+      <Stack.Screen
+        name="listing/[id]"
+        options={{
+          headerTitle: "",
+          headerTransparent: true,
+          headerBackTitle: "",
+          headerBackVisible: false,
+          headerBackTitleVisible: false,
+        }}
+      />
+
       {/* Modal Pop up */}
       <Stack.Screen
         name="(modals)/booking"

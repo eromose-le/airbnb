@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React, { memo, useEffect, useRef } from 'react';
 import { defaultStyles } from '@/constants/Styles';
-import { Marker } from 'react-native-maps';
+import { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MapView from 'react-native-map-clustering';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -89,25 +89,30 @@ const ListingsMap = memo(({ listings }: Props) => {
         clusterColor="#fff"
         clusterTextColor="#000"
         clusterFontFamily="mon-sb"
-        renderCluster={renderCluster}>
+        provider={PROVIDER_GOOGLE}
+        showsUserLocation
+        showsMyLocationButton
+        // renderCluster={renderCluster}
+      >
         {/* Render all our marker as usual */}
         {listings.features.map((item: any) => (
           <Marker
             coordinate={{
-              latitude: item.properties.latitude,
-              longitude: item.properties.longitude,
+              latitude: +item.properties.latitude,
+              longitude: +item.properties.longitude,
             }}
             key={item.properties.id}
-            onPress={() => onMarkerSelected(item)}>
+            onPress={() => onMarkerSelected(item)}
+          >
             <View style={styles.marker}>
               <Text style={styles.markerText}>€ {item.properties.price}</Text>
             </View>
           </Marker>
         ))}
       </MapView>
-      <TouchableOpacity style={styles.locateBtn} onPress={onLocateMe}>
+      {/* <TouchableOpacity style={styles.locateBtn} onPress={onLocateMe}>
         <Ionicons name="navigate" size={24} color={Colors.dark} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 });

@@ -6,6 +6,7 @@ import ListingsMap from "@/components/ListingsMap";
 import listingsDataGeo from "@/assets/data/airbnb-listings.geo.json";
 import { Stack } from "expo-router";
 import ExploreHeader from "@/components/ExploreHeader";
+import Listings from "@/components/Listings";
 
 const Page = () => {
   const items = useMemo(() => listingsData as any, []);
@@ -16,16 +17,18 @@ const Page = () => {
     setCategory(category);
   };
   return (
-    <View style={{ flex: 1, marginTop: 100 }}>
+    <View style={{ flex: 1, marginTop: 75 }}>
       <Stack.Screen
         options={{
           header: () => <ExploreHeader onCategoryChanged={onDataChanged} />,
         }}
       />
 
-      {/* <Listings listings={items} category={category} /> */}
       <ListingsMap listings={getoItems} />
+      <ListingsBottomSheet listings={items} category={category} />
+
       {/* <Text>Page</Text> */}
+      {/* <Listings listings={items} category={category} /> */}
       {/* <Link href={"/(modals)/login"}>Login</Link> */}
       {/* <Link href={"/(modals)/booking"}>Bookings</Link> */}
       {/* <Link href={"/listing/1"}>Listing detail page</Link> */}

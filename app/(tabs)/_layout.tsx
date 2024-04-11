@@ -27,6 +27,7 @@ const Layout = () => {
         name="whishlists"
         options={{
           tabBarLabel: "Whishlists",
+          headerTitle: "Whishlists",
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="heart-outline" size={size} color={color} />
           ),
@@ -36,6 +37,7 @@ const Layout = () => {
         name="trips"
         options={{
           tabBarLabel: "Trips",
+          headerTitle: "Trips",
           tabBarIcon: ({ size, color }) => (
             <FontAwesome5 name="airbnb" size={size} color={color} />
           ),
@@ -58,7 +60,7 @@ const Layout = () => {
         name="profile"
         options={{
           tabBarLabel: "Profile",
-          // headerShown: false,
+          headerShown: false,
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="person-circle-outline" size={size} color={color} />
           ),

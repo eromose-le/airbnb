@@ -92,7 +92,7 @@ const ListingsMap = memo(({ listings }: Props) => {
         provider={PROVIDER_GOOGLE}
         showsUserLocation
         showsMyLocationButton
-        // renderCluster={renderCluster}
+        renderCluster={renderCluster}
       >
         {/* Render all our marker as usual */}
         {listings.features.map((item: any) => (
@@ -110,9 +110,9 @@ const ListingsMap = memo(({ listings }: Props) => {
           </Marker>
         ))}
       </MapView>
-      {/* <TouchableOpacity style={styles.locateBtn} onPress={onLocateMe}>
+      <TouchableOpacity style={styles.locateBtn} onPress={onLocateMe}>
         <Ionicons name="navigate" size={24} color={Colors.dark} />
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </View>
   );
 });

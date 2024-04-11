@@ -9,18 +9,21 @@ import {
 import { defaultStyles } from "@/constants/Styles";
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
+import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
 import { useEffect, useRef, useState } from "react";
-// import { BottomSheetFlatList, BottomSheetFlatListMethods } from '@gorhom/bottom-sheet';
+import {
+  BottomSheetFlatList,
+  BottomSheetFlatListMethods,
+} from "@gorhom/bottom-sheet";
 
 interface Props {
   listings: any[];
-  refresh?: number;
+  refresh: number;
   category: string;
 }
 
 const Listings = ({ listings: items, refresh, category }: Props) => {
-  // const listRef = useRef<BottomSheetFlatListMethods>(null);
+  const listRef = useRef<BottomSheetFlatListMethods>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   // Update the view to scroll the list back top
@@ -31,7 +34,7 @@ const Listings = ({ listings: items, refresh, category }: Props) => {
   }, [refresh]);
 
   const scrollListTop = () => {
-    // listRef.current?.scrollToOffset({ offset: 0, animated: true });
+    listRef.current?.scrollToOffset({ offset: 0, animated: true });
   };
 
   // Use for "updating" the views data after category changed
@@ -47,27 +50,38 @@ const Listings = ({ listings: items, refresh, category }: Props) => {
   const renderRow: ListRenderItem<any> = ({ item }) => (
     <Link href={`/listing/${item.id}`} asChild>
       <TouchableOpacity>
-        <Animated.View style={styles.listing} entering={FadeInRight} exiting={FadeOutLeft}>
-        <Animated.Image source={{ uri: item.medium_url }} style={styles.image} />
-        <TouchableOpacity style={{ position: "absolute", right: 30, top: 30 }}>
-          <Ionicons name="heart-outline" size={24} color="#000" />
-        </TouchableOpacity>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text style={{ fontSize: 16, fontFamily: "mon-sb" }}>
-            {item.name}
-          </Text>
-          <View style={{ flexDirection: "row", gap: 4 }}>
-            <Ionicons name="star" size={16} />
-            <Text style={{ fontFamily: "mon-sb" }}>
-              {item.review_scores_rating / 20}
+        <Animated.View
+          style={styles.listing}
+          entering={FadeInRight}
+          exiting={FadeOutLeft}
+        >
+          <Animated.Image
+            source={{ uri: item.medium_url }}
+            style={styles.image}
+          />
+          <TouchableOpacity
+            style={{ position: "absolute", right: 30, top: 30 }}
+          >
+            <Ionicons name="heart-outline" size={24} color="#000" />
+          </TouchableOpacity>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={{ fontSize: 16, fontFamily: "mon-sb" }}>
+              {item.name}
             </Text>
+            <View style={{ flexDirection: "row", gap: 4 }}>
+              <Ionicons name="star" size={16} />
+              <Text style={{ fontFamily: "mon-sb" }}>
+                {item.review_scores_rating / 20}
+              </Text>
+            </View>
           </View>
-        </View>
-        <Text style={{ fontFamily: "mon" }}>{item.room_type}</Text>
-        <View style={{ flexDirection: "row", gap: 4 }}>
-          <Text style={{ fontFamily: "mon-sb" }}>€ {item.price}</Text>
-          <Text style={{ fontFamily: "mon" }}>night</Text>
-        </View>
+          <Text style={{ fontFamily: "mon" }}>{item.room_type}</Text>
+          <View style={{ flexDirection: "row", gap: 4 }}>
+            <Text style={{ fontFamily: "mon-sb" }}>€ {item.price}</Text>
+            <Text style={{ fontFamily: "mon" }}>night</Text>
+          </View>
         </Animated.View>
       </TouchableOpacity>
     </Link>
@@ -75,10 +89,10 @@ const Listings = ({ listings: items, refresh, category }: Props) => {
 
   return (
     <View style={defaultStyles.container}>
-      <FlatList
+      <BottomSheetFlatList
         renderItem={renderRow}
         data={loading ? [] : items}
-        // ref={listRef}
+        ref={listRef}
         ListHeaderComponent={
           <Text style={styles.info}>{items.length} homes</Text>
         }

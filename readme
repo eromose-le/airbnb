@@ -1,8 +1,44 @@
+## A REAL ESTATE APPLICATION
+
+This is a React Native AirBnB clone using [Clerk](https://clerk.com/?utm_source=sponsorship&utm_medium=github&utm_campaign=simong&utm_content=rn-airbnb) for user authentication.
+
+# Additional features:
+
+- [Expo Router](https://docs.expo.dev/routing/introduction/) file-based navigation
+- [Google](https://clerk.com/docs/authentication/social-connections/google?utm_source=sponsorship&utm_medium=github&utm_campaign=simong&utm_content=rn-airbnb) & [Apple](https://clerk.com/docs/authentication/social-connections/apple?utm_source=sponsorship&utm_medium=github&utm_campaign=simong&utm_content=rn-airbnb) Auth with Clerk
+- [Reanimated](https://reanimated-beta-docs.swmansion.com/) 3 for animations
+- [MapView](https://docs.expo.dev/versions/latest/sdk/map-view/) with Marker and [Clustering](https://github.com/venits/react-native-map-clustering)
+- [Bottom Sheet](https://gorhom.github.io/react-native-bottom-sheet/)
+- Modal with Animations and Blurred Background
+
 # Project setup
 npx create-expo-app airbnb -t tabs
 
 # Start Project
 npx expo
 
+# INSTALL SCRIPT
+npx expo install [PACKAGE-NAME]
+
 # Resources
 https://icons.expo.fyi/Index
+
+https://public.opendatasoft.com/explore/dataset/air-bnb-listings/export/?disjunctive.neighbourhood&disjunctive.column_10&disjunctive.city&refine.column_19=Germany&refine.city=Berlin
+
+```
+#### LAYOUT
+```
+- TABS
+  - index (Explore)
+    - ExploreHeader
+      - Search
+      - Scroll Categories
+    - ListingsMap
+    - ListingsBottomSheet
+  - whishlists
+  - trips
+  - inbox
+  - profile
+- MODALS
+  - login
+  - booking

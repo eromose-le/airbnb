@@ -80,9 +80,11 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
               </View>
             </TouchableOpacity>
           </Link>
-          <TouchableOpacity style={styles.filterBtn}>
-            <Ionicons name="options-outline" size={24} />
-          </TouchableOpacity>
+          <Link href={"/(modals)/booking"} asChild>
+            <TouchableOpacity style={styles.filterBtn}>
+              <Ionicons name="options-outline" size={24} />
+            </TouchableOpacity>
+          </Link>
         </View>
 
         <ScrollView

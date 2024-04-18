@@ -27,7 +27,6 @@ const Page = () => {
       <ListingsMap listings={getoItems} />
       <ListingsBottomSheet listings={items} category={category} />
 
-      {/* <Text>Page</Text> */}
       {/* <Listings listings={items} category={category} /> */}
       {/* <Link href={"/(modals)/login"}>Login</Link> */}
       {/* <Link href={"/(modals)/booking"}>Bookings</Link> */}

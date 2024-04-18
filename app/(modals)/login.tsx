@@ -92,11 +92,7 @@ const Page = () => {
           style={styles.btnOutline}
           onPress={() => onSelectAuth(Strategy.Apple)}
         >
-          <Ionicons
-            name="logo-apple"
-            size={24}
-            style={defaultStyles.btnIcon}
-          />
+          <Ionicons name="logo-apple" size={24} style={defaultStyles.btnIcon} />
           <Text style={styles.btnOutlineText}>Continue with Apple</Text>
         </TouchableOpacity>
 

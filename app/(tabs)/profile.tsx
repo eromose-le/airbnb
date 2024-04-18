@@ -15,14 +15,37 @@ import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import { Link } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
+import { RootState } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout } from "@/store/authSlice";
 
 const Page = () => {
+  const { authUser, appState } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+
   const { signOut, isSignedIn } = useAuth();
   const { user } = useUser();
   const [firstName, setFirstName] = useState(user?.firstName);
   const [lastName, setLastName] = useState(user?.lastName);
   const [email, setEmail] = useState(user?.emailAddresses[0].emailAddress);
   const [edit, setEdit] = useState(false);
+
+  const payload = {
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    email: user?.emailAddresses[0].emailAddress,
+  };
+
+  useEffect(() => {
+    if (user) {
+      dispatch(login(payload));
+    }
+
+    () => {};
+  }, [user]);
+
+  console.log("[GET REDUX-STATE]", { authUser, appState });
+  console.log("[GET CLERK-USER-STATE]", JSON.stringify(user, null, 4));
 
   // Load user data on mount
   useEffect(() => {
@@ -35,7 +58,6 @@ const Page = () => {
     setEmail(user.emailAddresses[0].emailAddress);
   }, [user]);
 
-  // console.log("USER", JSON.stringify(user, null, 4));
   // Update Clerk user data
   const onSaveUser = async () => {
     try {
@@ -75,7 +97,10 @@ const Page = () => {
         <Ionicons name="notifications-outline" size={26} />
       </View>
 
-      {user && (
+      <Text>{JSON.stringify(authUser, null, 3)}</Text>
+      <Text>{JSON.stringify(appState, null, 3)}</Text>
+
+      {isSignedIn && (
         <View style={styles.card}>
           <TouchableOpacity onPress={onCaptureImage}>
             <Image source={{ uri: user?.imageUrl }} style={styles.avatar} />
@@ -125,7 +150,14 @@ const Page = () => {
       )}
 
       {isSignedIn && (
-        <Button title="Log Out" onPress={() => signOut()} color={Colors.dark} />
+        <Button
+          title="Log Out"
+          onPress={() => {
+            signOut();
+            dispatch(logout(""));
+          }}
+          color={Colors.dark}
+        />
       )}
       {!isSignedIn && (
         <Link href={"/(modals)/login"} asChild>

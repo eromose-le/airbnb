@@ -9,6 +9,8 @@ import { TouchableOpacity } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ModalHeaderText from "@/components/ModalHeaderText";
 import Colors from "@/constants/Colors";
+import {store} from "@/store/store";
+import { Provider as ReduxProvider } from "react-redux";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 // Cache the Clerk JWT
@@ -65,14 +67,16 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <ClerkProvider
-        publishableKey={CLERK_PUBLISHABLE_KEY!}
-        tokenCache={tokenCache}
-      >
-        <RootLayoutNav />
-      </ClerkProvider>
-    </GestureHandlerRootView>
+    <ReduxProvider store={store}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <ClerkProvider
+          publishableKey={CLERK_PUBLISHABLE_KEY!}
+          tokenCache={tokenCache}
+        >
+          <RootLayoutNav />
+        </ClerkProvider>
+      </GestureHandlerRootView>
+    </ReduxProvider>
   );
 }
 
